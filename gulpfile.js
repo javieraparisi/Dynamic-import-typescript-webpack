@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var variante = require('./variante.json').min;
 var bootstrapersObject = {};
 var rutasObject = {};
-var directoryFolder = "dynamic-import-typescript";
+var directoryFolder = "src";
 //var tsFolder = "C:\\code\\type4\\";
 
 var es, log, logFile, counterBoots=0;
@@ -31,9 +31,8 @@ var writeBootObject = function(es) {
 var writeTsObject = function(es) {
     return es.map(function(file, cb) {
         log("nombre fichero: " + file.path);
-        var nameSpace = file.path.substring(file.path.indexOf(directoryFolder));
-        nameSpace = nameSpace.substring(nameSpace.indexOf("src")+4);
-        //var esVariante = esMultiVariante(nameSpace);
+        var nameSpace = file.path.substring(file.path.indexOf(directoryFolder)+4);
+
         log("namespce inicial: " + nameSpace);
         log("esVarianteActual: " + fnesVarianteActual(nameSpace));
         log("esBase: " + fnesBase(nameSpace));
@@ -44,7 +43,7 @@ var writeTsObject = function(es) {
         }
 
         log("namespce final: " + nameSpace);
-        var rutats = file.path.substring(file.path.indexOf(directoryFolder) + (directoryFolder.length + 1));
+        var rutats = file.path.substring(file.path.indexOf(directoryFolder));
         rutats = rutats.replace(".ts","");
         while (rutats.indexOf("\\")>0){
             rutats = rutats.replace("\\","/");
